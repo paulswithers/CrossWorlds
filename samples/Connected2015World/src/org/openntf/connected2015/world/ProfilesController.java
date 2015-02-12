@@ -27,7 +27,7 @@ public class ProfilesController {
 	@PUT
 	@Path("/person") 
 	public Response updateProfileInfo(
-			@QueryParam("fisrtname") String FirstName,
+			@QueryParam("firstname") String FirstName,
 			@QueryParam("lastname") String LastName) {
 		
 		return null;

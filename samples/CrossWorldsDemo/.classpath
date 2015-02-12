@@ -16,9 +16,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.openntf.xworlds.core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.openntf.xworlds.dominodeps"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.openntf.xworlds.oda"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -30,5 +27,23 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/IBM/Liberty/usr/extension/lib/org.openntf.xworlds.core_1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/IBM/Liberty/usr/extension/lib/org.openntf.xworlds.dominodeps_9.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/IBM/Liberty/usr/extension/lib/org.openntf.xworlds.oda_1.5.0.jar"/>
+	<classpathentry kind="lib" path="libs/com.google.guava_18.0.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/com.ibm.icu_3.8.1.v20120530.jar"/>
+	<classpathentry kind="lib" path="libs/com.ibm.icu.base_3.8.1.v20080530.jar"/>
+	<classpathentry kind="lib" path="libs/com.tinkerpop_2.6.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/javassist_3.18.2.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/javolution_6.1.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/jsr305_1.0.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/lwpd.commons.jar"/>
+	<classpathentry kind="lib" path="libs/lwpd.domino.napi.jar"/>
+	<classpathentry kind="lib" path="libs/Notes.jar"/>
+	<classpathentry kind="lib" path="libs/org.openntf.domino_1.5.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/org.openntf.domino.xsp_1.5.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/org.openntf.formula_1.5.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/org.openntf.junit4xpages_4.11.0.201501202214.jar"/>
+	<classpathentry kind="lib" path="libs/rx_1.0.0.201501202214.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

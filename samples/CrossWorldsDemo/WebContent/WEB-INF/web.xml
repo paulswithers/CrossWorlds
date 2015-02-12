@@ -38,6 +38,10 @@
 		<url-pattern>/demo/*</url-pattern>
 	</servlet-mapping>
 	<context-param>
+		<description>This defines the &quot;Signer&quot; identity for the app.
+Useful to &quot;limit&quot; app access to server dbs.
+
+If not set / doesn't exist then SIGNER = NATIVE</description>
 		<param-name>org.openntf.crossworlds.appsignername</param-name>
 		<param-value>CN=CrossWorlds/O=Factor-y/C=IT</param-value>
 	</context-param>
