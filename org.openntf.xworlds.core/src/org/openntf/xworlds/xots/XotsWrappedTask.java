@@ -1,5 +1,6 @@
 package org.openntf.xworlds.xots;
 
+import java.lang.annotation.AnnotationTypeMismatchException;
 import java.util.concurrent.Callable;
 
 import org.openntf.domino.Session;
@@ -19,6 +20,13 @@ import com.ibm.domino.napi.c.xsp.XSPNative;
 import lotus.domino.NotesException;
 import lotus.domino.NotesThread;
 
+/**
+ * @author Paul Withers
+ * @since 1.0.0
+ * 
+ *        Extension of {@linkplain org.openntf.domino.xsp.xots.XotsWrappedTask}
+ *
+ */
 public class XotsWrappedTask extends AbstractWrappedTask {
 	private Object wrappedTask;
 	private String dominoFullName;
@@ -46,7 +54,8 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 			try {
 
 				final long userHandle = NotesUtil.createUserNameList(username);
-				lotus.domino.Session rawSession = XSPNative.createXPageSessionExt(username, userHandle, false, true, _isFullAccess);
+				lotus.domino.Session rawSession = XSPNative.createXPageSessionExt(username, userHandle, false, true,
+						_isFullAccess);
 				Session sess = Factory.fromLotus(rawSession, Session.SCHEMA, null);
 				sess.setNoRecycle(false);
 				return sess;
@@ -61,13 +70,9 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 	/**
 	 * Common code for the wrappers
 	 * 
-	 * @param module
-	 * @param bubbleException
-	 * @param sessionFactory
-	 * @param callable
-	 * @param runnable
 	 * @return
 	 */
+	@Override
 	protected Object callOrRun() throws Exception {
 
 		try {
@@ -98,23 +103,23 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 	 * 
 	 * @return
 	 */
+	@Override
 	protected synchronized Object getWrappedTask() {
 		return wrappedTask;
 	}
 
 	/**
-	 * Determines the sessionType under which the current runnable should run.
-	 * The first non-null value of the following list is returned
-	 * <ul>
-	 * <li>If the runnable implements <code>IDominoRunnable</code>: result of
-	 * <code>getSessionType</code></li>
-	 * <li>the value of {@link SessionType} Annotation</li>
-	 * <li>DominoSessionType.DEFAULT</li>
-	 * </ul>
+	 * Determines the sessionType, scope etc under which the current runnable
+	 * should run. Based on same method in {@linkplain AbstractWrappedTask}
 	 * 
 	 * @param task
-	 *            the runnable to determine the DominoSessionType
+	 *            Callable or Runnable from which to extract settings. Should
+	 *            extend Callable (or AbstractOpenLogXotsCallable, to use
+	 *            OpenLog) or Runnable (or AbstractOpenLogXotsRunnable, to use
+	 *            OpenLog). Recommendation, though, is not to use OpenLog but
+	 *            use a Logger such as Logback.
 	 */
+	@Override
 	protected synchronized void setWrappedTask(final Object task) {
 		wrappedTask = task;
 		if (task == null)
@@ -122,7 +127,8 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 		// some security checks...
 		if (task instanceof NotesThread) {
 			// RPr: I'm not sure if this should be allowed anyway...
-			throw new IllegalArgumentException("Cannot wrap the NotesThread " + task.getClass().getName() + " into a DominoRunner");
+			throw new IllegalArgumentException(
+					"Cannot wrap the NotesThread " + task.getClass().getName() + " into a DominoRunner");
 		}
 		// if (task instanceof DominoFutureTask) {
 		// // RPr: don't know if this is possible
@@ -131,7 +137,8 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 		// }
 		if (task instanceof AbstractWrappedTask) {
 			// RPr: don't know if this is possible
-			throw new IllegalArgumentException("Cannot wrap the WrappedCallable " + task.getClass().getName() + " into a DominoRunner");
+			throw new IllegalArgumentException(
+					"Cannot wrap the WrappedCallable " + task.getClass().getName() + " into a DominoRunner");
 		}
 
 		if (task instanceof Tasklet.Interface) {
@@ -192,6 +199,11 @@ public class XotsWrappedTask extends AbstractWrappedTask {
 			}
 			if (context == null) {
 				context = Tasklet.Context.DEFAULT;
+			} else {
+				if (context.equals(Tasklet.Context.XSPSCOPED) || context.equals(Tasklet.Context.XSPFORCE)
+						|| context.equals(Tasklet.Context.XSPBARE)) {
+					throw new AnnotationTypeMismatchException(null, "XSP contexts are not allowed");
+				}
 			}
 
 			if (scope == null) {
