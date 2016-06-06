@@ -1,0 +1,8 @@
+CrossWorlds
+Copyright Daniele Vistalli, Paul Withers 2016
+
+This product includes software contributed to
+OpenNTF Inc. (http://www.OpenNTF.org/)
+
+The product includes the following third-party code:
+org.openntf.xworlds.dominodeps and org.openntf.xworlds.oda reference third-party code that needs to be used to build a functioning CrossWorlds feature, but no third-party code is distributed with the CrossWorlds source code. This is because of licensing issues (for Domino-related jar files) and to avoid version-specific dependency (for OpenNTF Domino API). For this same reason, no compiled version of CrossWorlds is provided, just source code, which needs compiling by the consumer according to the instructions at https://wiki.openntf.org/display/CW/Setup
