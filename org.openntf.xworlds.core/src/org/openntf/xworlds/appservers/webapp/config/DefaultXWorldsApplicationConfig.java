@@ -11,7 +11,6 @@ import org.openntf.domino.session.INamedSessionFactory;
 import org.openntf.domino.session.ISessionFactory;
 import org.openntf.domino.utils.Factory;
 import org.openntf.domino.utils.Factory.SessionType;
-import org.openntf.domino.xsp.session.XPageNamedSessionFactory;
 
 import com.google.common.annotations.Beta;
 import com.ibm.domino.napi.NException;
